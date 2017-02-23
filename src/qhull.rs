@@ -45,7 +45,7 @@ pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
     }
 
     // process.stdout.unwrap().read_to_string(&mut s);
-    let output = process.wait_with_output().unwrap();
+    let output = process.wait_with_output()?;
 
     let mut lines = Cursor::new(output.stdout).lines();
 
