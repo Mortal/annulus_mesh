@@ -28,10 +28,6 @@ impl Point {
 }
 
 /// Compute the Delaunay triangulation of a set of points by running them through `qhull`.
-///
-/// # Panics
-///
-/// Panics if `qhull` command is not available or fails.
 pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
     let mut process = Command::new("qhull")
                           .stdin(Stdio::piped())
