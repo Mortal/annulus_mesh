@@ -49,7 +49,7 @@ pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
 
     let mut lines = Cursor::new(output.stdout).lines();
 
-    let n = lines.next().unwrap().unwrap().parse::<usize>().unwrap();
+    let n = lines.next().unwrap()?.parse::<usize>().unwrap();
 
     let mut res = vec![];
 
