@@ -54,7 +54,7 @@ pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
     let mut res = vec![];
 
     for line in lines {
-        let s = line.unwrap();
+        let s = line?;
         let poly: Vec<usize> = s.split_whitespace().map(|e| e.parse::<usize>().unwrap()).collect();
         res.push(poly);
     }
