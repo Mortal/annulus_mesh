@@ -37,7 +37,7 @@ pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
                           .spawn()?;
 
     if let Some(ref mut out) = process.stdin {
-        writeln!(out, "2\n{}", ps.len()).unwrap();
+        writeln!(out, "2\n{}", ps.len())?;
 
         for &Point(x, y) in ps {
             writeln!(out, "{} {}", x, y).unwrap();
