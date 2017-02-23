@@ -91,7 +91,8 @@ fn main() {
 
     println!("Generated {} nodes", ps.len());
 
-    let indices = qhull_triangulation(&ps);
+    let indices = qhull_triangulation(&ps)
+        .unwrap_or_else(|e| panic!("couldn't spawn qhull: {:?}", e));
 
     println!("Delaunay triangulation has {} triangles", indices.len());
 

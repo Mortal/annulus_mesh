@@ -1,4 +1,5 @@
 use std::ops::Add;
+use std::io;
 use std::io::{Write, Cursor, BufRead};
 use std::process::{Command, Stdio};
 
@@ -31,14 +32,13 @@ impl Point {
 /// # Panics
 ///
 /// Panics if `qhull` command is not available or fails.
-pub fn qhull_triangulation(ps: &[Point]) -> Vec<Vec<usize>> {
+pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
     let mut process = Command::new("qhull")
                           .stdin(Stdio::piped())
                           .stdout(Stdio::piped())
                           .arg("d")
                           .arg("i")
-                          .spawn()
-                          .unwrap_or_else(|e| panic!("couldn't spawn qhull: {:?}", e));
+                          .spawn()?;
 
     if let Some(ref mut out) = process.stdin {
         writeln!(out, "2\n{}", ps.len()).unwrap();
@@ -64,5 +64,5 @@ pub fn qhull_triangulation(ps: &[Point]) -> Vec<Vec<usize>> {
     }
 
     assert_eq!(res.len(), n);
-    res
+    Ok(res)
 }
