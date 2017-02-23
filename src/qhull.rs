@@ -40,7 +40,7 @@ pub fn qhull_triangulation(ps: &[Point]) -> io::Result<Vec<Vec<usize>>> {
         writeln!(out, "2\n{}", ps.len())?;
 
         for &Point(x, y) in ps {
-            writeln!(out, "{} {}", x, y).unwrap();
+            writeln!(out, "{} {}", x, y)?;
         }
     }
 
